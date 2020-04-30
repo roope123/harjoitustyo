@@ -1,0 +1,2 @@
+rootProject.name='harkkatyö'
+include ':app'

@@ -1,0 +1,30 @@
+<resources>
+    <string name="app_name">harkkatyö</string>
+    <string name="edellinenPvm"><![CDATA[<-]]></string>
+    <string name="seuraavaPvm"><![CDATA[->]]></string>
+    <string name="ruoka_1">Ruoka 1</string>
+    <string name="Ruoka_1">Ruoka 1</string>
+    <string name="ruoka_2">Ruoka 2</string>
+    <string name="Ruoka_2">Ruoka 2</string>
+    <string name="keitto">Keitto</string>
+    <string name="Keitto">keitto</string>
+    <string name="kasvis">Kasvis</string>
+    <string name="Kasvis">Kasvis</string>
+    <string name="arvostelut">Arvostelut:</string>
+    <string name="nimi">Nimi</string>
+    <string name="puhelinnumero">Puhelinnumero</string>
+    <string name="s_hk_posti">Sähköposti</string>
+    <string name="tallenna">Tallenna</string>
+    <string name="l_het">Lähetä</string>
+    <string name="sanallinen_arvio_ruoasta">Sanallinen arvio ruoasta:</string>
+    <string name="arvostelulomake">Arvostelulomake</string>
+    <string name="tee_arvostelu">Tee arvostelu</string>
+    <string name="arvostelulomake2">Arvostelulomake:</string>
+    <string name="valitse_ravintola">Valitse ravintola:</string>
+    <string name="ruoka_arvosteluapplikaatio">Ruoka-arvosteluapplikaatio</string>
+    <string name="ravintola_1">Ravintola 1</string>
+    <string name="ravintola_2">Ravintola 2</string>
+    <string name="ravintola_3">Ravintola 3</string>
+    <string name="ruoan_laatu_1_5">Ruoan laatu (1-5):</string>
+    <string name="ruokailukokemus_1_5">Ruokailukokemus (1-5):</string>
+</resources>
