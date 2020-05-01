@@ -10,10 +10,13 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.StringWriter;
 
-class Lomakkeenluonti {
+class Createform {
 
 
-    void tiedosto(Context context) {
+    void file(Context context) {
+        //creating an xml file which contains default data of the evaluation form of the food
+        //serializer formats the text right for xml
+        //FileOutputStream writes the text to a file
         context.getFilesDir();
         System.out.println(context.getFilesDir());
 
@@ -54,7 +57,7 @@ class Lomakkeenluonti {
             serializer.endDocument();
             String result = writer.toString();
 
-            FileOutputStream fos = context.openFileOutput("Lomake.xml", Context.MODE_PRIVATE);
+            FileOutputStream fos = context.openFileOutput("Form.xml", Context.MODE_PRIVATE);
             fos.write(result.getBytes(), 0, result.getBytes().length);
             fos.close();
         } catch (FileNotFoundException e) {

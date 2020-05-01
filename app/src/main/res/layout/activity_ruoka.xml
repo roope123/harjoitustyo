@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Ruoka">
+    tools:context=".Food">
 
     <TextView
         android:id="@+id/textView9"
@@ -48,7 +48,7 @@
         android:layout_width="117dp"
         android:layout_height="37dp"
         android:layout_marginBottom="3dp"
-        android:onClick="openLomake"
+        android:onClick="openForm"
         android:text="@string/tee_arvostelu"
         android:textAppearance="@style/TextAppearance.AppCompat.Small"
         app:layout_constraintBottom_toTopOf="@+id/textView11"

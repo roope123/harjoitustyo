@@ -17,29 +17,30 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         context = this;
-        Lomakkeenluonti tiedosto = new Lomakkeenluonti();
-        tiedosto.tiedosto(context);
+        Createform file = new Createform();
+        file.file(context);
     }
 
     public void onClick(View v)
     {
-        openRuokalista("Ravintola 1");
+        openFoodmenu("Ravintola 1");
     }
 
     public void onClick2(View v)
     {
-        openRuokalista("Ravintola 2");
+        openFoodmenu("Ravintola 2");
     }
 
     public void onClick3(View v)
     {
-        openRuokalista("Ravintola 3");
+        openFoodmenu("Ravintola 3");
     }
 
-    public void openRuokalista(String nimi)
+    public void openFoodmenu(String name)
     {
-        Intent intent = new Intent(this, Ruokalista.class);
-        intent.putExtra("nimi", nimi);
+        //intent passes the name of selected restaurant to the next activity
+        Intent intent = new Intent(this, Foodmenu.class);
+        intent.putExtra("name", name);
         startActivity(intent);
     }
 

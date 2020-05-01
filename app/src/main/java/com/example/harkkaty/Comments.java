@@ -21,13 +21,14 @@ import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 
-class Kommentit {
+class Comments {
 
-    void tiedosto(Context context) {
+    void file(Context context) {
+        //creates and formats new xml-file for comments if it doesn't already exist
         context.getFilesDir();
-        File tiedosto = new File(context.getFilesDir() + "/Kommentit.xml");
+        File file = new File(context.getFilesDir() + "/Comments.xml");
         System.out.println(context.getFilesDir());
-        if (!tiedosto.exists())
+        if (!file.exists())
         {
             XmlSerializer serializer = Xml.newSerializer();
             StringWriter writer = new StringWriter();
@@ -40,7 +41,7 @@ class Kommentit {
                 serializer.endDocument();
                 String result = writer.toString();
 
-                FileOutputStream fos = context.openFileOutput("Kommentit.xml", Context.MODE_PRIVATE);
+                FileOutputStream fos = context.openFileOutput("Comments.xml", Context.MODE_PRIVATE);
                 fos.write(result.getBytes(), 0, result.getBytes().length);
                 fos.close();
             } catch (FileNotFoundException e) {
@@ -51,11 +52,13 @@ class Kommentit {
         }
     }
 
-    StringBuilder kommentit(Context context, String id) {
+    StringBuilder comments(Context context, String id) {
+        //gets id as parameter which makes the method to read all comment data of the specific id
+        //string builder appends every comment data and formats it suitable for setting it to comments in "food" activity
         StringBuilder sb = new StringBuilder();
         try {
             DocumentBuilder builder = DocumentBuilderFactory.newInstance().newDocumentBuilder();
-            FileInputStream fis = context.openFileInput("Kommentit.xml");
+            FileInputStream fis = context.openFileInput("Comments.xml");
             Document doc = builder.parse(fis);
             doc.getDocumentElement().normalize();
 

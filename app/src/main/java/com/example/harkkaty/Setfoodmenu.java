@@ -15,25 +15,27 @@ import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 
-class Setruokalista {
+class Setfoodmenu {
 
-    private String nimi1;
-    private String nimi2;
-    private String nimi3;
-    private String nimi4;
+    private String name1;
+    private String name2;
+    private String name3;
+    private String name4;
     private String id1;
     private String id2;
     private String id3;
     private String id4;
 
 
-    void setRuokalista(String nimi, int i, Context context)
+    void setFoodmenu(String name, int i, Context context)
     {
-        String ravintola = nimi.replaceAll(" ", "");
+        //changes the name of restaurant into a file name by erasing space and appending ".xml"
+        //reads data from the xml file where the i is the index of the day of the week, which was given in the times class
+        String restaurant = name.replaceAll(" ", "");
         try
         {
             DocumentBuilder builder = DocumentBuilderFactory.newInstance().newDocumentBuilder();
-            InputStream is = context.getAssets().open(ravintola + ".xml");
+            InputStream is = context.getAssets().open(restaurant + ".xml");
             Document doc = builder.parse(is);
             doc.getDocumentElement().normalize();
 
@@ -47,16 +49,16 @@ class Setruokalista {
             {
                 Element element = (Element) node;
 
-                nimi1 = element.getElementsByTagName("nimi1").item(0).getTextContent();
+                name1 = element.getElementsByTagName("nimi1").item(0).getTextContent();
                 id1 = element.getElementsByTagName("id1").item(0).getTextContent();
 
-                nimi2 = element.getElementsByTagName("nimi2").item(0).getTextContent();
+                name2 = element.getElementsByTagName("nimi2").item(0).getTextContent();
                 id2 = element.getElementsByTagName("id2").item(0).getTextContent();
 
-                nimi3 = element.getElementsByTagName("nimi3").item(0).getTextContent();
+                name3 = element.getElementsByTagName("nimi3").item(0).getTextContent();
                 id3 = element.getElementsByTagName("id3").item(0).getTextContent();
 
-                nimi4 = element.getElementsByTagName("nimi4").item(0).getTextContent();
+                name4 = element.getElementsByTagName("nimi4").item(0).getTextContent();
                 id4 = element.getElementsByTagName("id4").item(0).getTextContent();
             }
         } catch (ParserConfigurationException e) {
@@ -68,24 +70,24 @@ class Setruokalista {
         }
     }
 
-    String getNimi1()
+    String getName1()
     {
-        return nimi1;
+        return name1;
     }
 
-    String getNimi2()
+    String getName2()
     {
-        return nimi2;
+        return name2;
     }
 
-    String getNimi3()
+    String getName3()
     {
-        return nimi3;
+        return name3;
     }
 
-    String getNimi4()
+    String getName4()
     {
-        return nimi4;
+        return name4;
     }
 
     String getId1()

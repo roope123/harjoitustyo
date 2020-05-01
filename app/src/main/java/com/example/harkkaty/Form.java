@@ -11,7 +11,6 @@ import org.xml.sax.SAXException;
 import org.xmlpull.v1.XmlSerializer;
 
 import java.io.BufferedReader;
-import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -24,20 +23,21 @@ import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 
-class Lomake {
+class Form {
 
-    private String nimi;
-    private String puhnro;
-    private String sposti;
-    private String laatu;
-    private String kokemus;
-    private String arvio;
+    private String name;
+    private String phonenbr;
+    private String email;
+    private String quality;
+    private String experience;
+    private String evaluation;
 
     void getData(Context context)
     {
+        //reads the Form.xml which contains temporarily saved input data of the evaluation form
         try {
             DocumentBuilder builder = DocumentBuilderFactory.newInstance().newDocumentBuilder();
-            FileInputStream fis = context.openFileInput("Lomake.xml");
+            FileInputStream fis = context.openFileInput("Form.xml");
             Document doc = builder.parse(fis);
             doc.getDocumentElement().normalize();
 
@@ -49,12 +49,12 @@ class Lomake {
 
             if (node.getNodeType() == Node.ELEMENT_NODE) {
                 Element element = (Element) node;
-                nimi = element.getElementsByTagName("nimi").item(0).getTextContent();
-                puhnro = element.getElementsByTagName("puhnro").item(0).getTextContent();
-                sposti = element.getElementsByTagName("sposti").item(0).getTextContent();
-                laatu = element.getElementsByTagName("laatu").item(0).getTextContent();
-                kokemus = element.getElementsByTagName("kokemus").item(0).getTextContent();
-                arvio = element.getElementsByTagName("arvio").item(0).getTextContent();
+                name = element.getElementsByTagName("nimi").item(0).getTextContent();
+                phonenbr = element.getElementsByTagName("puhnro").item(0).getTextContent();
+                email = element.getElementsByTagName("sposti").item(0).getTextContent();
+                quality = element.getElementsByTagName("laatu").item(0).getTextContent();
+                experience = element.getElementsByTagName("kokemus").item(0).getTextContent();
+                evaluation = element.getElementsByTagName("arvio").item(0).getTextContent();
             }
 
         } catch (SAXException e) {
@@ -66,37 +66,39 @@ class Lomake {
         }
     }
 
-    String getNimi()
+    String getName()
     {
-        return nimi;
+        return name;
     }
 
-    String getPuhnro()
+    String getPhonenbr()
     {
-        return puhnro;
+        return phonenbr;
     }
 
-    String getSposti()
+    String getEmail()
     {
-        return sposti;
+        return email;
     }
 
-    String getLaatu()
+    String getQuality()
     {
-        return laatu;
+        return quality;
     }
 
-    String getKokemus()
+    String getExperience()
     {
-        return kokemus;
+        return experience;
     }
 
-    String getArvio()
+    String getEvaluation()
     {
-        return arvio;
+        return evaluation;
     }
 
-    void laheta(Context context, String id, String nimi, String puhnro, String sposti, String laatu, String kokemus, String arvio) {
+    void send(Context context, String id, String name, String phonenbr, String email, String quality, String experience, String evaluation) {
+        //saves input data into comments file by reading the file first, removing end tag "lista" and appending input data in xml format and end tag "lista" in to it
+        //in the end changes the saved data of the form into default
         XmlSerializer serializer = Xml.newSerializer();
         StringWriter writer = new StringWriter();
         try {
@@ -105,27 +107,27 @@ class Lomake {
             serializer.startTag("", "id" + id);
 
             serializer.startTag("", "nimi");
-            serializer.text(nimi);
+            serializer.text(name);
             serializer.endTag("", "nimi");
 
             serializer.startTag("", "puhnro");
-            serializer.text(puhnro);
+            serializer.text(phonenbr);
             serializer.endTag("", "puhnro");
 
             serializer.startTag("", "sposti");
-            serializer.text(sposti);
+            serializer.text(email);
             serializer.endTag("", "sposti");
 
             serializer.startTag("", "laatu");
-            serializer.text(laatu);
+            serializer.text(quality);
             serializer.endTag("", "laatu");
 
             serializer.startTag("", "kokemus");
-            serializer.text(kokemus);
+            serializer.text(experience);
             serializer.endTag("", "kokemus");
 
             serializer.startTag("", "arvio");
-            serializer.text(arvio);
+            serializer.text(evaluation);
             serializer.endTag("", "arvio");
 
             serializer.endTag("", "id" + id);
@@ -136,7 +138,7 @@ class Lomake {
 
 
             StringBuilder sb = new StringBuilder();
-            InputStream is = context.openFileInput("Kommentit.xml");
+            InputStream is = context.openFileInput("Comments.xml");
             BufferedReader br = new BufferedReader(new InputStreamReader(is));
             String s;
 
@@ -151,7 +153,7 @@ class Lomake {
             String string = sb.toString();
 
 
-            FileOutputStream fos = context.openFileOutput("Kommentit.xml", Context.MODE_PRIVATE);
+            FileOutputStream fos = context.openFileOutput("Comments.xml", Context.MODE_PRIVATE);
             fos.write(string.getBytes(), 0, string.getBytes().length);
             fos.close();
 
@@ -196,7 +198,7 @@ class Lomake {
             serializer2.endDocument();
             String result2 = writer2.toString();
 
-            FileOutputStream fos2 = context.openFileOutput("Lomake.xml", Context.MODE_PRIVATE);
+            FileOutputStream fos2 = context.openFileOutput("Form.xml", Context.MODE_PRIVATE);
             fos2.write(result2.getBytes(), 0, result2.getBytes().length);
             fos2.close();
 
@@ -205,8 +207,9 @@ class Lomake {
         }
     }
 
-    void tallenna(Context context, String nimi, String puhnro, String sposti, String laatu, String kokemus, String arvio)
+    void save(Context context, String name, String phonenbr, String email, String quality, String experience, String evaluation)
     {
+        //saves input data temporarily into xml file
         context.getFilesDir();
         System.out.println(context.getFilesDir());
 
@@ -219,27 +222,27 @@ class Lomake {
             serializer.startTag("", "id");
 
             serializer.startTag("", "nimi");
-            serializer.text(nimi);
+            serializer.text(name);
             serializer.endTag("", "nimi");
 
             serializer.startTag("", "puhnro");
-            serializer.text(puhnro);
+            serializer.text(phonenbr);
             serializer.endTag("", "puhnro");
 
             serializer.startTag("", "sposti");
-            serializer.text(sposti);
+            serializer.text(email);
             serializer.endTag("", "sposti");
 
             serializer.startTag("", "laatu");
-            serializer.text(laatu);
+            serializer.text(quality);
             serializer.endTag("", "laatu");
 
             serializer.startTag("", "kokemus");
-            serializer.text(kokemus);
+            serializer.text(experience);
             serializer.endTag("", "kokemus");
 
             serializer.startTag("", "arvio");
-            serializer.text(arvio);
+            serializer.text(evaluation);
             serializer.endTag("", "arvio");
 
             serializer.endTag("", "id");
@@ -247,7 +250,7 @@ class Lomake {
             serializer.endDocument();
             String result = writer.toString();
 
-            FileOutputStream fos = context.openFileOutput("Lomake.xml", Context.MODE_PRIVATE);
+            FileOutputStream fos = context.openFileOutput("Form.xml", Context.MODE_PRIVATE);
             fos.write(result.getBytes(), 0, result.getBytes().length);
             fos.close();
 
