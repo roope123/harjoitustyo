@@ -10,27 +10,22 @@ import org.xml.sax.SAXException;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.ArrayList;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 
+
 class Setfoodmenu {
 
-    private String name1;
-    private String name2;
-    private String name3;
-    private String name4;
-    private String id1;
-    private String id2;
-    private String id3;
-    private String id4;
-
+    private ArrayList<FoodItem> fooditem_array = new ArrayList<>();
 
     void setFoodmenu(String name, int i, Context context)
     {
         //changes the name of restaurant into a file name by erasing space and appending ".xml"
         //reads data from the xml file where the i is the index of the day of the week, which was given in the times class
+        fooditem_array.clear();
         String restaurant = name.replaceAll(" ", "");
         try
         {
@@ -49,17 +44,10 @@ class Setfoodmenu {
             {
                 Element element = (Element) node;
 
-                name1 = element.getElementsByTagName("nimi1").item(0).getTextContent();
-                id1 = element.getElementsByTagName("id1").item(0).getTextContent();
-
-                name2 = element.getElementsByTagName("nimi2").item(0).getTextContent();
-                id2 = element.getElementsByTagName("id2").item(0).getTextContent();
-
-                name3 = element.getElementsByTagName("nimi3").item(0).getTextContent();
-                id3 = element.getElementsByTagName("id3").item(0).getTextContent();
-
-                name4 = element.getElementsByTagName("nimi4").item(0).getTextContent();
-                id4 = element.getElementsByTagName("id4").item(0).getTextContent();
+                for(int j = 0; j < 4; j++) {
+                    int k = j + 1;
+                    fooditem_array.add(new FoodItem(element.getElementsByTagName("nimi" + k).item(0).getTextContent(), element.getElementsByTagName("id" + k).item(0).getTextContent()));
+                }
             }
         } catch (ParserConfigurationException e) {
             e.printStackTrace();
@@ -70,43 +58,14 @@ class Setfoodmenu {
         }
     }
 
-    String getName1()
+    String getName(int x)
     {
-        return name1;
+        return fooditem_array.get(x - 1).getName();
     }
 
-    String getName2()
+    String getId(int x)
     {
-        return name2;
+        return fooditem_array.get(x - 1).getId();
     }
 
-    String getName3()
-    {
-        return name3;
-    }
-
-    String getName4()
-    {
-        return name4;
-    }
-
-    String getId1()
-    {
-        return id1;
-    }
-
-    String getId2()
-    {
-        return id2;
-    }
-
-    String getId3()
-    {
-        return id3;
-    }
-
-    String getId4()
-    {
-        return id4;
-    }
 }

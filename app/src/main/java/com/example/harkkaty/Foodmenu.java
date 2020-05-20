@@ -76,20 +76,20 @@ public class Foodmenu extends AppCompatActivity {
     public void setData()
     {
         //Gets names and id's of foods of the day and sets them into variables and into TextViews
-        name1 = foodmenu.getName1();
-        id1 = foodmenu.getId1();
+        name1 = foodmenu.getName(1);
+        id1 = foodmenu.getId(1);
         food1_button.setText(name1);
 
-        name2 = foodmenu.getName2();
-        id2 = foodmenu.getId2();
+        name2 = foodmenu.getName(2);
+        id2 = foodmenu.getId(2);
         food2_button.setText(name2);
 
-        name3 = foodmenu.getName3();
-        id3 = foodmenu.getId3();
+        name3 = foodmenu.getName(3);
+        id3 = foodmenu.getId(3);
         soup_button.setText(name3);
 
-        name4 = foodmenu.getName4();
-        id4 = foodmenu.getId4();
+        name4 = foodmenu.getName(4);
+        id4 = foodmenu.getId(4);
         vege_button.setText(name4);
 
     }
